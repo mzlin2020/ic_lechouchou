@@ -1,4 +1,5 @@
 // 导入样式
+// element-plus按需引用
 import 'element-plus/theme-chalk/index.css'
 import {
   ElAside,
@@ -30,6 +31,7 @@ import {
   ElTable,
   ElTableColumn,
   ElImage,
+  ElPagination
 } from 'element-plus'
 
 const conponents = [
@@ -61,9 +63,11 @@ const conponents = [
   ElDatePicker,
   ElTable,
   ElTableColumn,
-  ElImage
+  ElImage,
+  ElPagination
 ]
 
+// 统一注册
 export default function(app) {
   for(const conponent of conponents) {
     app.component(conponent.name, conponent)

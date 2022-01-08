@@ -13,7 +13,7 @@
         </el-header>
         <!-- 主要内容 -->
         <el-main class="page-content">
-            <router-view class="mainContent" />
+          <router-view class="mainContent" />
         </el-main>
       </el-container>
     </el-container>
@@ -26,6 +26,7 @@ import NavMenu from "@/components/nav-menu/nav-menu.vue";
 import NavHeader from "@/components/nav-header/nav-header.vue";
 import localCache from "@/utils/cache";
 import router from "@/router";
+import { isPC } from "@/utils/isPc";
 onBeforeMount(() => {
   // 判断：如果没有token，路由跳转会登录页
   const token = localCache.getCache("token");
@@ -39,6 +40,12 @@ let isFold = ref(false);
 const clickIsFold = (data) => {
   isFold.value = data;
 };
+
+//移动端收缩菜单
+let isMobile = !isPC();
+if (isMobile) {
+  isFold.value = true;
+}
 </script>
 
 <style scoped>
@@ -87,5 +94,8 @@ const clickIsFold = (data) => {
   transition: width 0.3s linear;
   scrollbar-width: none; /* firefox */
   -ms-overflow-style: none; /* IE 10+ */
+}
+.el-aside::-webkit-scrollbar {
+  display: none;
 }
 </style>

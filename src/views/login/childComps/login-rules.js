@@ -3,12 +3,12 @@ export const rules = {
   username: [
     {
       required: true,
-      message: "用户名不能为空~",
+      message: "账号不能为空~",
       trigger: "blur", //失去焦点时触发
     },
     {
-      pattern: /^[a-z0-9]{6,12}$/,
-      message: "用户名必须是6-12个字母或者数字！",
+      pattern: /^(?:(?:\+|00)86)?1[3-9]\d{9}$/,
+      message: "账号必须是符合规范的手机号码！",
       trigger: "blur",
     },
   ],

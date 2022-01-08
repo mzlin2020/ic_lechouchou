@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 // import localCache from "@/utils/cache.js";
 
 // 路由懒加载
@@ -61,7 +61,7 @@ const routes = [
 
 const router = createRouter({
   routes,
-  history: createWebHashHistory(),
+  history: createWebHistory(),
 });
 
 export default router;

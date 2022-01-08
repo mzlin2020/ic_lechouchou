@@ -24,6 +24,7 @@ const store = createStore({
 // 刷新页面时，重新将数据保存进vuex中
 export function setupStore() {
   store.dispatch("login/loadLocalLogin"); //触发login中的action中的loadLocalLogin
+  
 }
 
 export default store;

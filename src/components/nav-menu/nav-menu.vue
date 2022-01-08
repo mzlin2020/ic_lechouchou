@@ -8,7 +8,7 @@
 
     <!-- 菜单选项 -->
     <el-menu
-      default-active="2"
+      default-active="13"
       class="el-menu-vertical"
       background-color="#0c2135"
       text-color="#b7bdc3"
@@ -20,7 +20,7 @@
         <template v-if="item.type === 1">
           <el-sub-menu :index="item.id + ''">
             <template #title>
-              <el-icon :size="10">
+              <el-icon :size="18">
                 <Monitor v-if="item.icon === 'Monitor'" />
                 <Setting v-if="item.icon === 'Setting'" />
                 <Goods v-if="item.icon === 'Goods'" />

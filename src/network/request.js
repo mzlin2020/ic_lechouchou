@@ -1,9 +1,12 @@
 import axios from "axios";
 
+// 根据环境赋值不同的BASEURL
+const API_BASE_URL = process.env.VUE_APP_BASE_URL
+
 export function request(config) {
   return new Promise((resolve, reject) => {
     const instance = axios.create({
-      baseURL: "api/",
+      baseURL: API_BASE_URL,
       timeout: 5000,
     });
 

@@ -1,28 +1,29 @@
 export const formItems = [
     { field: 'name',
       type: 'input',
-      label: 'anchor',
+      label: '主播名',
       placeholder: '请输入网红名称'
     },
     { 
       field: 'selection',
       type: 'select',
-      label: '类目',
-      placeholder: '请选择商品品类',
+      label: '粉丝数',
+      placeholder: '请选择粉丝数范围',
       options: [
-        { title: '食品', value: '食品' },
-        { title: '生鲜', value: '生鲜' },
-        { title: '美妆', value: '美妆' },
-        { title: '母婴', value: '母婴' },
-        { title: '百货', value: '百货' },
-        { title: '其他', value: '其他' },
+        { title: '5000W以上', value: '5000W以上' },
+        { title: '1000W-5000W', value: '1000W-5000W' },
+        { title: '500W-1000W', value: '500W-1000W' },
+        { title: '100W-500W', value: '100W-500W' },
+        { title: '50W-100W', value: '50W-100W' },
+        { title: '1W-50W', value: '1W-50W' },
+        { title: '小于10000', value: '小于10000' },
       ]
     },
     { 
       field: 'status',
       type: 'select',
       label: '状态',
-      placeholder: '请选择用户状态',
+      placeholder: '用户状态',
       options: [
         { title: '启用', value: '启用' },
         { title: '禁用', value: '禁用' },

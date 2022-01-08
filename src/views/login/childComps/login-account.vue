@@ -7,7 +7,7 @@
     <!-- 账号 -->
     <el-form :rules="rules" :model="account" hide-required-asterisk ref="formRef">
       <el-form-item prop="username">
-        <el-input v-model="account.username" :prefix-icon="User" placeholder="用户名" />
+        <el-input v-model="account.username" :prefix-icon="User" placeholder="账号" />
       </el-form-item>
       <!-- 密码 -->
       <el-form-item prop="password">

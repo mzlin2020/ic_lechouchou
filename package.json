@@ -5,13 +5,16 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build:beta": "vue-cli-service build --mode development",
+    "build:release": "vue-cli-service build --mode production"
   },
   "dependencies": {
+    "@element-plus/icons": "0.0.11",
     "@element-plus/icons-vue": "^0.2.4",
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
-    "element-plus": "^1.2.0-beta.5",
+    "element-plus": "^1.3.0-beta.1",
     "mitt": "^3.0.0",
     "normalize.css": "^8.0.1",
     "vue": "^3.2.26",
