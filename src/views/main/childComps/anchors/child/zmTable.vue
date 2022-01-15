@@ -1,17 +1,30 @@
 <template>
   <div class="zm-table">
-    <el-table :data="dataInfo" style="width: 100%" @selection-change="handleSelectionChange">
+    <!-- 表头 -->
+    <div class="header">
+      <slot name="header">
+        <div class="title">主播列表</div>
+        <div class="handler">
+          <slot name="headerHandler"></slot>
+        </div>
+      </slot>
+    </div>
+    <el-table 
+    :data="dataInfo"
+    style="width: 100%" 
+    @selection-change="handleSelectionChange" 
+    :default-sort="{ prop: 'fansNum', order: 'descending' }">
       <!-- 选择列 -->
-      <el-table-column type="selection" min-width="50" align="center" />
+      <el-table-column type="selection" width="50" align="center" />
       <!-- 序号列 -->
-      <el-table-column type="index" label="序号" align="center" width="60" />
+      <el-table-column type="index" label="序号" align="center" width="70" v-if="ispc" />
       <!-- 其他列 -->
       <template v-for="propItem in tableList" :key="propItem.prop">
         <!-- 注：每一个el-table-column相当于一列 -->
         <el-table-column
           :prop="propItem.prop"
           :label="propItem.label"
-          :min-width="propItem.minWidth"
+          width="proItem.minWidth"
           align="center"
           show-overflow-tooltip
         >
@@ -23,14 +36,11 @@
           </template>
         </el-table-column>
       </template>
-      <!-- 带货能力分析列 -->
-      <el-table-column label="分析" align="center" min-width="60">
-        <el-button type="primary">带货能力</el-button>
-      </el-table-column>
+
     </el-table>
 
     <!-- 表格尾部（插槽） -->
-    <div class="footer">
+    <div class="footer" v-if="ispc">
       <slot name="footer">
         <el-pagination
           v-model:currentPage="page.currentPage"
@@ -49,6 +59,7 @@
 
 <script setup>
 import { defineProps, defineEmits } from "vue";
+import { isPC } from "@/utils/isPc";
 
 const props = defineProps({
   dataInfo: {
@@ -73,12 +84,13 @@ const props = defineProps({
 });
 // 展示数据
 const tableList = [
-  { prop: "anchorName", label: "主播名", minWidth: "60" },
-  { prop: "avatar", label: "头像", minWidth: "60", slotName: "image" },
-  { prop: "fansNum", label: "粉丝数目", minWidth: "60", slotName: "fansNum" },
-  { prop: "pgLiveQuantity", label: "场均带货量", minWidth: "60", slotName: "pgLiveQuantity" },
-  { prop: "medianPrice", label: "客单价", minWidth: "60", slotName: "medianPrice" },
-  { prop: "status", label: "状态", minWidth: "60", slotName: "status" },
+  { prop: "anchorName", label: "主播名", minWidth: "100" },
+  { prop: "avatar", label: "头像", minWidth: "120", slotName: "image" },
+  { prop: "fansNum", label: "粉丝数目", minWidth: "110", slotName: "fansNum" },
+  { prop: "pgLiveQuantity", label: "场均带货", minWidth: "110", slotName: "pgLiveQuantity" },
+  { prop: "medianPrice", label: "客单价", minWidth: "100", slotName: "medianPrice"},
+  { prop: "status", label: "状态", minWidth: "120", slotName: "status"},
+  { prop: "analyze", label: "分析", minWidth: "120", slotName: "analyze"},
 ];
 
 // 查看哪一个行被选中
@@ -94,6 +106,8 @@ const handleSizeChange = (pageSize) => {
 const handleCurrentChange = (currentPage) => {
   em("update:page", { ...props.page, currentPage });
 };
+
+let ispc = isPC();
 </script>
 
 <style scoped>
@@ -104,5 +118,17 @@ const handleCurrentChange = (currentPage) => {
 .footer {
   margin-top: 15px;
   text-align: right;
+}
+
+.handler {
+  align-items: center;
+}
+.header {
+  display: flex;
+  height: 45px;
+  padding: 0 5px;
+  color: #555;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>

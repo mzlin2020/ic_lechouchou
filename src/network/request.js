@@ -10,7 +10,7 @@ export function request(config) {
       timeout: 5000,
     });
 
-    // 响应拦截(过滤掉axios的增加的数据)
+    // 响应拦截(过滤掉axios的增加的外层数据)
     instance.interceptors.response.use(
       (res) => {
         res = res.data;

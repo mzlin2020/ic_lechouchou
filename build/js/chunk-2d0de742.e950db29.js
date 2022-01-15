@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0de742"],{"865c":function(e,n,c){"use strict";c.r(n);var t=c("7a23"),o={class:"lives"},r=Object(t["createElementVNode"])("h2",null,"直播信息",-1),a=[r];function d(e,n){return Object(t["openBlock"])(),Object(t["createElementBlock"])("div",o,a)}var l=c("d959"),s=c.n(l);const u={},i=s()(u,[["render",d]]);n["default"]=i}}]);
-//# sourceMappingURL=chunk-2d0de742.e950db29.js.map

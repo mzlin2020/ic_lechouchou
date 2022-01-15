@@ -3,7 +3,7 @@
     <ZmForm :formItems="formItems" :formData="formData">
       <!-- 标题 -->
       <template #header>
-        <h2 class="form-title">网红信息</h2>
+        <h2 class="form-title">找主播</h2>
       </template>
 
       <!-- 尾部 -->
@@ -15,16 +15,14 @@
       </template>
     </ZmForm>
     <ZmTable :dataInfo="anchorsInfo" v-model:page="pageInfo" :anchorsCount="count.anchorsCount">
+      <!-- 表头列 -->
+      <template #headerHandler>
+        <el-button plain type="danger" @click="darkRoom">小黑屋</el-button>
+      </template>
       <!-- 图片 -->
       <template #image="scope">
         <el-image style="width: 60px; height: 60px" :src="scope.row.picUrl" :preview-src-list="[scope.row.picUrl]">
         </el-image>
-      </template>
-      <!-- 状态列 -->
-      <template #status="scope">
-        <el-button plain size="default" :type="scope.row.status ? 'success' : 'danger'">{{
-          scope.row.status ? "启用" : "关进黑屋"
-        }}</el-button>
       </template>
       <!-- 格式化粉丝数 -->
       <template #fansNum="scope">
@@ -34,19 +32,33 @@
       <template #medianPrice="scope">
         <div>{{ $filter.formatMedianPrice(scope.row.medianPrice) }}</div>
       </template>
+      <!-- 关进黑屋列 -->
+      <template #status="scope">
+        <el-button plain type="danger" @click="forbidden(scope.row)">{{forboddenText}}</el-button>
+      </template>
+      <!-- 带货能力列 -->
+      <template #analyze="scope">
+        <el-button type="primary" @click="analyze(scope.row)">{{analyzeText}}</el-button>
+      </template>
     </ZmTable>
   </div>
 </template>
 
 <script setup>
 import { reactive, computed, ref, watch } from "vue";
-import ZmForm from "@/components/zmForm-UI/zmFrom.vue";
+import ZmForm from "@/components/zmForm-UI/zmForm.vue";
 import ZmTable from "./child/zmTable.vue";
 import { formItems } from "./child/search.config.js";
 import { useStore } from "vuex";
 import localCache from "@/utils/cache";
+import { isPC } from "@/utils/isPc";
+import { putInDarkRoom } from '@/network/anchor.js'
+import { ElMessage } from 'element-plus'
+import router from '@/router'
 
-// 绑定数据
+
+// 一、表单相关逻辑
+// 表单绑定数据
 const formData = reactive({
   name: "",
   selection: "",
@@ -58,8 +70,10 @@ const pageInfo = ref({
   currentPage: 1,
   pageSize: 10,
 });
-// 发送网络请求，获取数据(保存到vuex)
 
+// 二、网络请求相关
+
+// 发送网络请求，获取数据(保存到vuex)
 const store = useStore();
 const anchorsInfo = computed(() => store.state.anchors.anchorsInfo);
 const getAnchorsInfo = (formData = {}) => {
@@ -95,6 +109,41 @@ const handleSearchClick = async () => {
     count.anchorsCount = localCache.getCache("anchorsCount");
   }, 1000);
 };
+
+
+// 三、表格逻辑
+// 关进黑屋
+const forbidden = (data) => {
+  const { anchorId } = data
+  putInDarkRoom(anchorId,0)
+  ElMessage({
+  message: '操作成功',
+  type: 'success',
+})
+  setTimeout(() => {
+    getAnchorsInfo(); //更新
+  }, 400);
+}
+
+// 带货分析
+const analyze = (data) => {
+  console.log(data);
+}
+
+// 进入黑屋
+const darkRoom = () => {
+  // 传递参数anchors
+  router.push('darkRoom/anchors')
+}
+
+// 四、适配移动端（为了好看些）
+let isMobile = !isPC();
+let forboddenText = ref('关进黑屋')
+let analyzeText = ref('带货能力')
+if(isMobile) {
+  forboddenText.value = '禁用'
+  analyzeText.value = '分析'
+}
 </script>
 
 <style scoped>

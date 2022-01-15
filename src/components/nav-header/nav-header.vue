@@ -11,9 +11,9 @@
       </div>
       <!-- 用户信息 -->
       <div class="userInfo">
-        <el-icon size="20" class="user-icon"><ChatDotRound /></el-icon>
-        <el-icon size="20" class="user-icon"><CollectionTag /></el-icon>
-        <el-icon size="20" class="user-icon"><Bell /></el-icon>
+        <el-icon size="20" class="user-icon" v-if="isShow"><ChatDotRound /></el-icon>
+        <el-icon size="20" class="user-icon" v-if="isShow"><CollectionTag /></el-icon>
+        <el-icon size="20" class="user-icon" v-if="isShow"><Bell /></el-icon>
         <el-avatar :size="35" :src="circleUrl" class="avatar"></el-avatar>
         <user-info />
       </div>
@@ -26,6 +26,7 @@ import { Expand, ChatDotRound, CollectionTag, Bell } from "@element-plus/icons-v
 import UserInfo from "./user-info.vue";
 import Breadcrumb from './breadcrumb.vue'
 import { defineEmits, ref } from "vue";
+import { isPC } from '@/utils/isPc'
 // 将是否收缩菜单的isFold传给父组件
 let isFold = ref(false);
 const em = defineEmits(["clickIsFold"]);
@@ -34,10 +35,12 @@ const IconClick = () => {
   em("clickIsFold", isFold.value);
 };
 
+// 移动端是否显示用户信息
+const isShow = isPC()
+
 // 头像地址（暂时写死）
 const circleUrl = "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png";
 </script>
-
 <style scoped>
 .nav-header {
   width: 100%;
@@ -59,7 +62,7 @@ const circleUrl = "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1ep
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0px;
 }
 /* 头像 */
 .userInfo {

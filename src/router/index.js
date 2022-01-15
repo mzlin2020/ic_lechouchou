@@ -8,9 +8,10 @@ const System = () => import("@/views/main/childComps/system/system.vue");
 const Anchors = () => import("@/views/main/childComps/anchors/anchors.vue");
 const Lives = () => import("@/views/main/childComps/lives/lives.vue");
 const Goods = () => import("@/views/main/childComps/goods/goods.vue");
-const AdminRegister = () => import("@/views/main/childComps/admin/adminRegister.vue");
+const AdminManagement = () => import("@/views/main/childComps/admin/adminManagement.vue");
 const AdminPermission = () => import("@/views/main/childComps/admin/adminPermission.vue");
 const NotFound = () => import("@/views/main/childComps/NotFound/not-found.vue")
+const DarkRoom = () => import("@/views/main/childComps/darkRoom/darkRoom.vue")
 
 const routes = [
   {
@@ -39,12 +40,16 @@ const routes = [
         component: Goods,
       },
       {
-        path: "/main/admin/register",
-        component: AdminRegister,
+        path: "/main/admin/management",
+        component: AdminManagement,
       },
       {
         path: "/main/admin/permission",
         component: AdminPermission,
+      },
+      {
+        path: "/main/darkRoom/:darkRoomName",
+        component: DarkRoom,
       },
     ],
   },
@@ -66,8 +71,6 @@ const router = createRouter({
 
 export default router;
 
-// const token = localCache.getCache('token')
-// console.log(token);
 
 // //全局守卫-登录验证
 // router.beforeEach((to, from, next) => {

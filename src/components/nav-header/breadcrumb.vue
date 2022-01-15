@@ -27,4 +27,7 @@ const changePathInfo = (obj) => {
 </script>
 
 <style scoped>
+.bread-crumb {
+  margin-left: 20px;
+}
 </style>

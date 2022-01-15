@@ -1,6 +1,8 @@
 import { createStore } from "vuex";
 import login from "./login/login";
 import anchors from "./main/anchors"
+import admin from './main/admin'
+import lives from './main/lives'
 
 const store = createStore({
   state() {
@@ -17,7 +19,9 @@ const store = createStore({
   },
   modules: {
     login, //登录子模块
-    anchors,
+    anchors, //网红信息模块
+    admin, //系统管理模块
+    lives //直播商品模块
   },
 });
 

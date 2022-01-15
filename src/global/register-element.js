@@ -31,7 +31,9 @@ import {
   ElTable,
   ElTableColumn,
   ElImage,
-  ElPagination
+  ElPagination,
+  ElDialog,
+  ElAutocomplete,
 } from 'element-plus'
 
 const conponents = [
@@ -64,7 +66,9 @@ const conponents = [
   ElTable,
   ElTableColumn,
   ElImage,
-  ElPagination
+  ElPagination,
+  ElDialog,
+  ElAutocomplete,
 ]
 
 // 统一注册

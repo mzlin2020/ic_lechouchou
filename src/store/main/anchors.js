@@ -18,7 +18,7 @@ const anchorsModule = {
   },
   actions: {
     async getAnchorsInfoAction({commit}, payload) {
-      const anchorsInfo = await request({
+      let anchorsInfo = await request({
         url:'anchors',
         params: {
           offset: payload.offset,
@@ -27,7 +27,14 @@ const anchorsModule = {
           fansNum: payload.selection
         }
       })
-      // console.log(anchorsInfo)
+      // 过滤掉ifShow字段为0的主播
+      anchorsInfo = anchorsInfo.filter(item => {
+        if(item.ifShow !== 1) {
+          return false
+        } else {
+          return item
+        }
+      })
       // 保存数据
       commit('saveAnchorsInfo', anchorsInfo)
     }

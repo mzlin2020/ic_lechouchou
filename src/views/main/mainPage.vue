@@ -12,7 +12,7 @@
           <nav-header @clickIsFold="clickIsFold" />
         </el-header>
         <!-- 主要内容 -->
-        <el-main class="page-content">
+        <el-main class="page-content" v-bind="addId">
           <router-view class="mainContent" />
         </el-main>
       </el-container>
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, ref, reactive } from "vue";
 import NavMenu from "@/components/nav-menu/nav-menu.vue";
 import NavHeader from "@/components/nav-header/nav-header.vue";
 import localCache from "@/utils/cache";
@@ -42,9 +42,14 @@ const clickIsFold = (data) => {
 };
 
 //移动端收缩菜单
+//移动端时，给el-main增加一个id改变样式
 let isMobile = !isPC();
-if (isMobile) {
+let addId = null
+if(isMobile) {
   isFold.value = true;
+  addId = reactive({
+  id: 'change-dedault-padding'
+})
 }
 </script>
 
@@ -80,8 +85,13 @@ if (isMobile) {
   text-align: center;
   background-color: #f0f2f5;
 }
+/* 手机端去除el-main默认padding */
+#change-dedault-padding { 
+  --el-main-padding: 0px;
+}
 .mainContent {
   background-color: #fff;
+  border-radius: 5px;
 }
 /* 侧边栏 */
 .el-aside {

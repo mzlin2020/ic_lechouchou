@@ -1,6 +1,6 @@
 <template>
   <div class="admin-permission">
-    <h2>权限管理</h2>
+    <h2>更多设置</h2>
   </div>
 </template>
 

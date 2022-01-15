@@ -8,7 +8,7 @@
 
     <!-- 菜单选项 -->
     <el-menu
-      default-active="13"
+      default-active="20"
       class="el-menu-vertical"
       background-color="#0c2135"
       text-color="#b7bdc3"
@@ -25,13 +25,13 @@
                 <Setting v-if="item.icon === 'Setting'" />
                 <Goods v-if="item.icon === 'Goods'" />
                 <VideoCamera v-if="item.icon === 'VideoCamera'" />
-                <Avatar v-if="item.icon === 'Avatar'" />
+                <Management v-if="item.icon === 'Management'" />
               </el-icon>
               <span>{{ item.name }}</span>
             </template>
             <!-- 二级菜单 -->
             <template v-for="subitem in item.children" :key="subitem.id">
-              <el-menu-item :index="subitem.id + ''" @click="getRoute(subitem.url,item.name,subitem.name)">
+              <el-menu-item :index="subitem.id + ''" @click="getRoute(subitem.url, item.name, subitem.name)">
                 <i v-if="subitem.icon" :class="item.icon"></i>
                 <span>{{ subitem.name }}</span>
               </el-menu-item>
@@ -45,10 +45,10 @@
 
 <script setup>
 import { reactive, defineProps } from "vue";
-import { Monitor, Setting, Goods, VideoCamera, Avatar } from "@element-plus/icons-vue";
+import { Monitor, Setting, Goods, VideoCamera, Management } from "@element-plus/icons-vue";
 import { menu } from "./menuInfo";
-import router from '@/router'
-import emitter from '@/utils/eventBus.js'
+import router from "@/router";
+import emitter from "@/utils/eventBus.js";
 
 // 获取菜单
 const menuInfo = reactive(menu);
@@ -56,17 +56,17 @@ const menuInfo = reactive(menu);
 // 是否收缩菜单
 defineProps({
   isFold: {
-    type: Boolean
-  }
-})
+    type: Boolean,
+  },
+});
 
 // 获取路由信息,保存路径名（用于展示面包屑）
-const getRoute = (url,pathName1,pathName2) => {
+const getRoute = (url, pathName1, pathName2) => {
   // 1.切换路由
-  router.push(url)
+  router.push(url);
   // 2.事件总线传递路径信息
-  emitter.emit('pathInfo', {pathName1, pathName2})
-}
+  emitter.emit("pathInfo", { pathName1, pathName2 });
+};
 </script>
 
 <style scoped>

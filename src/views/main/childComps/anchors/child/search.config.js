@@ -19,14 +19,4 @@ export const formItems = [
         { title: '小于10000', value: '小于10000' },
       ]
     },
-    { 
-      field: 'status',
-      type: 'select',
-      label: '状态',
-      placeholder: '用户状态',
-      options: [
-        { title: '启用', value: '启用' },
-        { title: '禁用', value: '禁用' },
-      ]
-    },
   ]
