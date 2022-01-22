@@ -34,6 +34,8 @@ import {
   ElPagination,
   ElDialog,
   ElAutocomplete,
+  ElDescriptions,
+  ElDescriptionsItem,
 } from 'element-plus'
 
 const conponents = [
@@ -69,6 +71,8 @@ const conponents = [
   ElPagination,
   ElDialog,
   ElAutocomplete,
+  ElDescriptions,
+  ElDescriptionsItem,
 ]
 
 // 统一注册

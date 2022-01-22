@@ -34,11 +34,7 @@ export default {
       if (valid) {
         setTimeout(() => {
           const token = store.state.login.userInfo.token;
-          console.log(token);
           if (!token) {
-            // ElMessageBox.alert("账号或者密码错误", "提示", {
-            //   center: true,
-            // });
             ElMessage.error('账号或者密码存在错误~')
           }
         }, 1000);

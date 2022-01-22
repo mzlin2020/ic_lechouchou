@@ -1,5 +1,5 @@
-import mitt from 'mitt'
+import mitt from "mitt";
 
 // 全局事件总线
-const emitter = mitt()
-export default emitter
+const emitter = mitt();
+export default emitter;

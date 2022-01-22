@@ -162,7 +162,7 @@ const updateInfo = () => {
   if (updateUserData.password !== updateUserData.row.password) {
     updateUserData.isPasswordChange = true;
   }
-  console.log("---", updateUserData);
+  
   update(updateUserData);
   setTimeout(() => {
     //更新

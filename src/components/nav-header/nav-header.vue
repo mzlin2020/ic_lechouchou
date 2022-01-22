@@ -7,7 +7,7 @@
     <div class="content">
       <!-- 面包屑 -->
       <div>
-        <Breadcrumb/>
+        <Breadcrumb />
       </div>
       <!-- 用户信息 -->
       <div class="userInfo">
@@ -24,9 +24,9 @@
 <script setup>
 import { Expand, ChatDotRound, CollectionTag, Bell } from "@element-plus/icons-vue";
 import UserInfo from "./user-info.vue";
-import Breadcrumb from './breadcrumb.vue'
+import Breadcrumb from "./breadcrumb.vue";
 import { defineEmits, ref } from "vue";
-import { isPC } from '@/utils/isPc'
+import { isPC } from "@/utils/isPc";
 // 将是否收缩菜单的isFold传给父组件
 let isFold = ref(false);
 const em = defineEmits(["clickIsFold"]);
@@ -36,7 +36,7 @@ const IconClick = () => {
 };
 
 // 移动端是否显示用户信息
-const isShow = isPC()
+const isShow = isPC();
 
 // 头像地址（暂时写死）
 const circleUrl = "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png";

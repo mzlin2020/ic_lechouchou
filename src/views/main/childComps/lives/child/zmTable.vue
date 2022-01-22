@@ -9,10 +9,7 @@
         </div>
       </slot>
     </div>
-    <el-table 
-    :data="dataInfo" 
-    style="width: 100%" 
-    @selection-change="handleSelectionChange" >
+    <el-table :data="dataInfo" style="width: 100%">
       <!-- 选择列 -->
       <el-table-column type="selection" width="50" align="center" />
       <!-- 序号列 -->
@@ -85,16 +82,12 @@ const tableList = [
   { prop: "anchorName", label: "主播名称", minWidth: "100" },
   { prop: "liveTitle", label: "直播名称", minWidth: "120" },
   { prop: "visitNum", label: "观众数", minWidth: "110", slotName: "visitNum" },
-  { prop: "totalAmount", label: "销售金额", minWidth: "100", slotName: "totalAmount"},
+  { prop: "totalAmount", label: "销售金额", minWidth: "100", slotName: "totalAmount" },
   { prop: "liveQuantity", label: "销售数量", minWidth: "110", slotName: "liveQuantity" },
-  { prop: "status", label: "状态", minWidth: "120", slotName: "status"},
-  { prop: "analyze", label: "分析", minWidth: "120", slotName: "analyze"},
+  { prop: "status", label: "状态", minWidth: "120", slotName: "status" },
+  { prop: "analyze", label: "分析", minWidth: "120", slotName: "analyze" },
 ];
 
-// 查看哪一个行被选中
-const handleSelectionChange = () => {
-  console.log("哪一个选项被相中");
-};
 const em = defineEmits(["update:page"]);
 // 展示n/条页
 const handleSizeChange = (pageSize) => {

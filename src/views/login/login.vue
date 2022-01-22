@@ -21,8 +21,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("../../assets/img/login-bg1.jpeg");
-  background-color: #2d3a4b;
+  background-color: #828ddc;
   width: 100%;
   height: 100%;
 }

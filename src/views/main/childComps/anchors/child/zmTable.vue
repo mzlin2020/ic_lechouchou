@@ -9,11 +9,7 @@
         </div>
       </slot>
     </div>
-    <el-table 
-    :data="dataInfo"
-    style="width: 100%" 
-    @selection-change="handleSelectionChange" 
-    :default-sort="{ prop: 'fansNum', order: 'descending' }">
+    <el-table :data="dataInfo" style="width: 100%">
       <!-- 选择列 -->
       <el-table-column type="selection" width="50" align="center" />
       <!-- 序号列 -->
@@ -36,7 +32,6 @@
           </template>
         </el-table-column>
       </template>
-
     </el-table>
 
     <!-- 表格尾部（插槽） -->
@@ -88,15 +83,11 @@ const tableList = [
   { prop: "avatar", label: "头像", minWidth: "120", slotName: "image" },
   { prop: "fansNum", label: "粉丝数目", minWidth: "110", slotName: "fansNum" },
   { prop: "pgLiveQuantity", label: "场均带货", minWidth: "110", slotName: "pgLiveQuantity" },
-  { prop: "medianPrice", label: "客单价", minWidth: "100", slotName: "medianPrice"},
-  { prop: "status", label: "状态", minWidth: "120", slotName: "status"},
-  { prop: "analyze", label: "分析", minWidth: "120", slotName: "analyze"},
+  { prop: "medianPrice", label: "客单价", minWidth: "100", slotName: "medianPrice" },
+  { prop: "status", label: "状态", minWidth: "120", slotName: "status" },
+  { prop: "analyze", label: "分析", minWidth: "120", slotName: "analyze" },
 ];
 
-// 查看哪一个行被选中
-const handleSelectionChange = () => {
-  console.log("哪一个选项被相中");
-};
 const em = defineEmits(["update:page"]);
 // 展示n/条页
 const handleSizeChange = (pageSize) => {

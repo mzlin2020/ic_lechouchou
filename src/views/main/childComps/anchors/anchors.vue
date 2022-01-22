@@ -17,7 +17,7 @@
     <ZmTable :dataInfo="anchorsInfo" v-model:page="pageInfo" :anchorsCount="count.anchorsCount">
       <!-- 表头列 -->
       <template #headerHandler>
-        <el-button plain type="danger" @click="darkRoom">小黑屋</el-button>
+        <el-button plain type="danger" @click="darkRoom" >小黑屋</el-button>
       </template>
       <!-- 图片 -->
       <template #image="scope">
@@ -34,7 +34,7 @@
       </template>
       <!-- 关进黑屋列 -->
       <template #status="scope">
-        <el-button plain type="danger" @click="forbidden(scope.row)">{{forboddenText}}</el-button>
+        <el-button plain type="danger" class="controlBtn" @click="forbidden(scope.row)">{{forboddenText}}</el-button>
       </template>
       <!-- 带货能力列 -->
       <template #analyze="scope">
@@ -52,7 +52,7 @@ import { formItems } from "./child/search.config.js";
 import { useStore } from "vuex";
 import localCache from "@/utils/cache";
 import { isPC } from "@/utils/isPc";
-import { putInDarkRoom } from '@/network/anchor.js'
+import { anchorsDarkRoom } from '@/network/anchor.js'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
 
@@ -115,7 +115,7 @@ const handleSearchClick = async () => {
 // 关进黑屋
 const forbidden = (data) => {
   const { anchorId } = data
-  putInDarkRoom(anchorId,0)
+  anchorsDarkRoom(anchorId,0)
   ElMessage({
   message: '操作成功',
   type: 'success',
@@ -127,7 +127,9 @@ const forbidden = (data) => {
 
 // 带货分析
 const analyze = (data) => {
-  console.log(data);
+  const { anchorId } = data
+  // 携带用户id跳转到带货能力详情页
+  router.push(`catAbility/${anchorId}`)
 }
 
 // 进入黑屋
@@ -153,5 +155,10 @@ if(isMobile) {
 .form-button {
   text-align: right;
   padding: 0 80px 20px 0;
+}
+.controlBtn:focus {
+  background-color: #fef0f0 !important;
+  color: #f78484 !important;
+  border-color: #fbc4c4;
 }
 </style>

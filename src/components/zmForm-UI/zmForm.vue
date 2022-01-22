@@ -6,7 +6,7 @@
     <el-form :label-width="labelWidth">
       <el-row>
         <template v-for="item in formItems" :key="item.label">
-          <el-col  v-bind="collayout">
+          <el-col v-bind="collayout">
             <el-form-item :label="item.label" :style="itemStyle">
               <!-- v-if决定是否展示文本输入，还是密码输入 -->
               <template v-if="item.type === 'input' || item.type === 'password'">
@@ -35,17 +35,9 @@
               <!-- 决定是否显示按范围搜索 -->
               <template v-else-if="item.type === 'countpicker'">
                 <span>
-             <el-input
-                  style="width: 40%"
-                  :placeholder="item.placeholder1"
-                  v-model="formData[`${item.field1}`]"
-                />
-                &nbsp;至&nbsp;
-                <el-input
-                  style="width: 40%"
-                  :placeholder="item.placeholder2"
-                  v-model="formData[`${item.field2}`]"
-                />
+                  <el-input style="width: 40%" :placeholder="item.placeholder1" v-model="formData[`${item.field1}`]" />
+                  &nbsp;至&nbsp;
+                  <el-input style="width: 40%" :placeholder="item.placeholder2" v-model="formData[`${item.field2}`]" />
                 </span>
               </template>
             </el-form-item>
@@ -92,13 +84,12 @@ let itemStyle = {
   padding: "0px 10px",
 };
 // 根据不同的平台改变样式
-if(isPC()) {
+if (isPC()) {
   labelWidth = "70px";
   itemStyle = {
-  padding: "0px 40px",
-};
+    padding: "0px 40px",
+  };
 }
-
 </script>
 
 <style></style>

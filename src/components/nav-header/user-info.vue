@@ -1,6 +1,6 @@
 <template>
   <el-dropdown :hide-on-click="false">
-    <span >
+    <span>
       <span>{{ userInfo.name }}</span>
       <el-icon class="selectMore">
         <arrow-down />
@@ -30,20 +30,19 @@
 <script setup>
 import { useStore } from "vuex";
 import { ArrowDown, Setting, SwitchButton, User } from "@element-plus/icons-vue";
-import router from '@/router'
-import localCache from '@/utils/cache'
+import router from "@/router";
+import localCache from "@/utils/cache";
 // 获取用户信息
 const store = useStore();
 const userInfo = store.state.login.userInfo;
 
-
 // 退出登录
 const exitLogin = () => {
   // 清空缓存、vuex
-  localCache.clearCache()
-  store.dispatch('login/clearUserInfo')
-  router.push('/login')
-}
+  localCache.clearCache();
+  store.dispatch("login/clearUserInfo");
+  router.push("/login");
+};
 </script>
 
 <style scoped>
@@ -52,6 +51,6 @@ const exitLogin = () => {
 }
 .selectMore {
   margin-left: 5px;
-  vertical-align:middle; /*图片文字居中*/
+  vertical-align: middle; /*图片文字居中*/
 }
 </style>

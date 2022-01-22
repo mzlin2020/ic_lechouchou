@@ -8,7 +8,7 @@
 
     <!-- 菜单选项 -->
     <el-menu
-      default-active="20"
+      :default-active="currentIndex"
       class="el-menu-vertical"
       background-color="#0c2135"
       text-color="#b7bdc3"
@@ -23,16 +23,13 @@
               <el-icon :size="18">
                 <Monitor v-if="item.icon === 'Monitor'" />
                 <Setting v-if="item.icon === 'Setting'" />
-                <Goods v-if="item.icon === 'Goods'" />
-                <VideoCamera v-if="item.icon === 'VideoCamera'" />
                 <Management v-if="item.icon === 'Management'" />
               </el-icon>
               <span>{{ item.name }}</span>
             </template>
             <!-- 二级菜单 -->
             <template v-for="subitem in item.children" :key="subitem.id">
-              <el-menu-item :index="subitem.id + ''" @click="getRoute(subitem.url, item.name, subitem.name)">
-                <i v-if="subitem.icon" :class="item.icon"></i>
+              <el-menu-item :index="subitem.id + ''" @click="getRoute( subitem.id, subitem.url, item.name, subitem.name)">
                 <span>{{ subitem.name }}</span>
               </el-menu-item>
             </template>
@@ -44,13 +41,14 @@
 </template>
 
 <script setup>
-import { reactive, defineProps } from "vue";
-import { Monitor, Setting, Goods, VideoCamera, Management } from "@element-plus/icons-vue";
+import { reactive, defineProps, computed } from "vue";
+import { Monitor, Setting, Management } from "@element-plus/icons-vue";
 import { menu } from "./menuInfo";
 import router from "@/router";
 import emitter from "@/utils/eventBus.js";
+import localCache from "@/utils/cache";
 
-// 获取菜单
+// 获取菜单数据
 const menuInfo = reactive(menu);
 
 // 是否收缩菜单
@@ -60,8 +58,16 @@ defineProps({
   },
 });
 
+// 当前的Id（当前被选中的菜单）
+let currentIndex = computed(() => {
+  //本地缓存为空时，默认跳转系统总览
+  return  localCache.getCache("currentIndex") ?? "10" 
+})
+
 // 获取路由信息,保存路径名（用于展示面包屑）
-const getRoute = (url, pathName1, pathName2) => {
+const getRoute = (id, url, pathName1, pathName2) => {
+  id = String(id)
+  localCache.setCache("currentIndex", id)
   // 1.切换路由
   router.push(url);
   // 2.事件总线传递路径信息

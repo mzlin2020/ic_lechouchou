@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-// import localCache from "@/utils/cache.js";
 
 // 路由懒加载
 const Main = () => import("@/views/main/mainPage.vue");
@@ -10,19 +9,23 @@ const Lives = () => import("@/views/main/childComps/lives/lives.vue");
 const Goods = () => import("@/views/main/childComps/goods/goods.vue");
 const AdminManagement = () => import("@/views/main/childComps/admin/adminManagement.vue");
 const AdminPermission = () => import("@/views/main/childComps/admin/adminPermission.vue");
-const NotFound = () => import("@/views/main/childComps/NotFound/not-found.vue")
-const DarkRoom = () => import("@/views/main/childComps/darkRoom/darkRoom.vue")
+const NotFound = () => import("@/views/main/childComps/NotFound/not-found.vue");
+const DarkRoom = () => import("@/views/main/childComps/darkRoom/darkRoom.vue");
+const CatAbility = () => import("@/views/main/childComps/catAbility/catAbility.vue");
+const LiveGoods = () => import("@/views/main/childComps/liveGoods/liveGoods.vue");
 
 const routes = [
   {
     path: "/",
-    redirect: "/main/anchors",
+    component: System,
+    redirect: "/main/system",
   },
   {
     path: "/main",
     component: Main,
     name: "main",
     children: [
+      //嵌套路由
       {
         path: "/main/system",
         component: System,
@@ -51,6 +54,14 @@ const routes = [
         path: "/main/darkRoom/:darkRoomName",
         component: DarkRoom,
       },
+      {
+        path: "/main/catAbility/:anchorId",
+        component: CatAbility,
+      },
+      {
+        path: "/main/liveGoods/:liveInfo",
+        component: LiveGoods,
+      },
     ],
   },
   {
@@ -59,9 +70,9 @@ const routes = [
     name: "login",
   },
   {
-    path: '/:pathMatch(.*)*',
-    component: NotFound
-  }
+    path: "/:pathMatch(.*)*",
+    component: NotFound,
+  },
 ];
 
 const router = createRouter({
@@ -70,7 +81,6 @@ const router = createRouter({
 });
 
 export default router;
-
 
 // //全局守卫-登录验证
 // router.beforeEach((to, from, next) => {

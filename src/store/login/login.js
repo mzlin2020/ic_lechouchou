@@ -18,8 +18,8 @@ const loginModule = {
     },
     // 清空用户信息
     clearUserInfo(state) {
-      state.userInfo = ""
-    }
+      state.userInfo = "";
+    },
   },
   actions: {
     async loginAction({ commit }, payload) {
@@ -46,9 +46,9 @@ const loginModule = {
     },
 
     // 推出登录，清空内存
-    clearUserInfo({commit}) {
-      commit("clearUserInfo")
-    }
+    clearUserInfo({ commit }) {
+      commit("clearUserInfo");
+    },
   },
 };
 

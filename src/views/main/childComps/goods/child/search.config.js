@@ -5,7 +5,7 @@ export const formItems = [
       placeholder: '请输入商品名称'
     },
     { 
-      field: 'selection',
+      field: 'catName',
       type: 'select',
       label: '类目',
       placeholder: '请选择商品类目',
@@ -34,8 +34,8 @@ export const formItems = [
         { title: '其他', value: '其他' },
       ]
     },
-    { field1: 'minNum',
-      field2: 'maxNum',
+    { field1: 'min',
+      field2: 'max',
       type: 'countpicker',
       label: '销售数量',
       placeholder1: '最小数',

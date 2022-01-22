@@ -2,8 +2,8 @@
   <div class="main">
     <el-container class="main-content">
       <!-- 菜单栏 -->
-      <el-aside :width="isFold ? '60px' : '210px'">
-        <nav-menu :isFold="isFold" />
+      <el-aside :width="isFold ? '60px' : showMenu">
+          <nav-menu :isFold="isFold" />
       </el-aside>
 
       <el-container class="page">
@@ -28,7 +28,7 @@ import localCache from "@/utils/cache";
 import router from "@/router";
 import { isPC } from "@/utils/isPc";
 onBeforeMount(() => {
-  // 判断：如果没有token，路由跳转会登录页
+  // 判断：如果没有token，路由跳转会登录页(bug：token过期后无法触发)
   const token = localCache.getCache("token");
   if (!token) {
     router.push("/login");
@@ -44,12 +44,14 @@ const clickIsFold = (data) => {
 //移动端收缩菜单
 //移动端时，给el-main增加一个id改变样式
 let isMobile = !isPC();
-let addId = null
-if(isMobile) {
-  isFold.value = true;
+let addId = null;
+let showMenu = ref("210px");
+if (isMobile) {
+  isFold.value = false;
+  showMenu.value = "0px";
   addId = reactive({
-  id: 'change-dedault-padding'
-})
+    id: "change-dedault-padding",
+  });
 }
 </script>
 
@@ -68,6 +70,7 @@ if(isMobile) {
 /* 头部 */
 .el-header {
   height: 48px !important;
+  border-bottom: 1px solid #eee;
 }
 .el-header {
   /*使内容都居中*/
@@ -86,7 +89,7 @@ if(isMobile) {
   background-color: #f0f2f5;
 }
 /* 手机端去除el-main默认padding */
-#change-dedault-padding { 
+#change-dedault-padding {
   --el-main-padding: 0px;
 }
 .mainContent {

@@ -10,10 +10,10 @@
 <script setup>
 import emitter from "@/utils/eventBus.js";
 import { reactive } from "vue";
-import { isPC } from '@/utils/isPc.js'
+import { isPC } from "@/utils/isPc.js";
 
 // 移动端面包屑不展示
-let isPc = isPC()
+let isPc = isPC();
 
 //获取路径信息
 let pathInfo = reactive(["系统总览", "系统介绍"]);

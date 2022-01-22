@@ -32,7 +32,7 @@ export default {
     });
     const store = useStore();
     const formRef = ref();
-    // 具体的登录逻辑
+    // 具体的登录逻辑（被panel组件所执行）
     const loginAction = (isKeepPassword) => {
       //  el-form中validate方法可以返回用户输入是否正确
       formRef.value.validate((valid) => {
@@ -52,6 +52,7 @@ export default {
 
           // 执行登录验证
           store.dispatch("login/loginAction", { ...account });
+
         } else {
           console.log("用户输入不符合规则");
         }
