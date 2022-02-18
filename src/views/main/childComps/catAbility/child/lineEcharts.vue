@@ -1,20 +1,39 @@
 <template>
   <div class="line-echarts">
-      <BaseEcharts :options="option"/>
+      <div class="base-echart" ref="echartDivRef"></div>
   </div>
 </template>
 
 <script setup>
-import BaseEcharts from '@/components/echarts/baseEcharts.vue'
-import { computed } from 'vue'
+import { ref, onMounted, defineExpose } from 'vue'
+import * as echarts from 'echarts'
+import { useStore } from 'vuex'
 
-const option = computed(() => {
-   return {
+const store = useStore()
+
+// 获取dom
+const echartDivRef = ref();
+
+let echartInstance = null
+onMounted(() => {
+  // 初始化
+echartInstance = echarts.init(echartDivRef.value)
+
+// 使图表具备响应式
+window.addEventListener('resize', () => {
+  echartInstance.resize()
+})
+})
+
+const oprionAction = () => {
+  //清除上一次的
+  echartInstance.clear()
+  const option = {
   tooltip: {
     trigger: 'axis'
   },
   legend: {
-    data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+    data: store.state.anchors.historyData.legend
   },
   grid: {
     left: '3%',
@@ -25,47 +44,31 @@ const option = computed(() => {
   xAxis: {
     type: 'category',
     boundaryGap: false,
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    data: store.state.anchors.historyData.xAxis
   },
   yAxis: {
     type: 'value'
   },
-  series: [
-    {
-      name: 'Email',
-      type: 'line',
-      stack: 'Total',
-      data: [120, 132, 101, 134, 90, 230, 210]
-    },
-    {
-      name: 'Union Ads',
-      type: 'line',
-      stack: 'Total',
-      data: [220, 182, 191, 234, 290, 330, 310]
-    },
-    {
-      name: 'Video Ads',
-      type: 'line',
-      stack: 'Total',
-      data: [150, 232, 201, 154, 190, 330, 410]
-    },
-    {
-      name: 'Direct',
-      type: 'line',
-      stack: 'Total',
-      data: [320, 332, 301, 334, 390, 330, 320]
-    },
-    {
-      name: 'Search Engine',
-      type: 'line',
-      stack: 'Total',
-      data: [820, 932, 901, 934, 1290, 1330, 1320]
-    }
-  ]
-};
-})
+  series: store.state.anchors.historyData.series
+}
+  // 设置option(更新option)
+  echartInstance.setOption(option)
+}
 
+// 网路有延迟，在此处等待一段时间后获取数据，设置设置option
+setTimeout(() => {
+  oprionAction()
+}, 1000);
+
+// 暴露出去
+defineExpose({
+  oprionAction
+})
 </script>
 
 <style scoped>
+.base-echart {
+  width: 100%;
+  height: 360px;
+}
 </style>

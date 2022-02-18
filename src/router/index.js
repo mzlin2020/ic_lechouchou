@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 // 路由懒加载
 const Main = () => import("@/views/main/mainPage.vue");
 const Login = () => import("@/views/login/login.vue");
-const System = () => import("@/views/main/childComps/system/system.vue");
+// const System = () => import("@/views/main/childComps/system/system.vue");
 const Anchors = () => import("@/views/main/childComps/anchors/anchors.vue");
 const Lives = () => import("@/views/main/childComps/lives/lives.vue");
 const Goods = () => import("@/views/main/childComps/goods/goods.vue");
@@ -15,10 +15,11 @@ const CatAbility = () => import("@/views/main/childComps/catAbility/catAbility.v
 const LiveGoods = () => import("@/views/main/childComps/liveGoods/liveGoods.vue");
 
 const routes = [
+  // 默认跳转到网红页
   {
-    path: "/",
-    component: System,
-    redirect: "/main/system",
+    path: "/",   
+    component: Anchors,
+    redirect: "/main/anchors",
   },
   {
     path: "/main",
@@ -26,10 +27,6 @@ const routes = [
     name: "main",
     children: [
       //嵌套路由
-      {
-        path: "/main/system",
-        component: System,
-      },
       {
         path: "/main/anchors",
         component: Anchors,

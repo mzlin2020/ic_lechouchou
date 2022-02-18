@@ -5,6 +5,7 @@ export const formItems = [
     label: '产品类别',
     placeholder: '请选择商品类目',
     options: [
+      {title: '全部', value: '全部'},
       { title: '手机数码', value: '手机数码' },
       { title: '食品', value: '食品' },
       { title: '生鲜', value: '生鲜' },

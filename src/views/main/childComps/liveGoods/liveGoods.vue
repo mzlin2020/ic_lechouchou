@@ -11,7 +11,6 @@
       <div>直播场次: {{liveTitle}}</div>
     </div>
 
-
     <!-- 表格 -->
         <!-- 表单 -->
     <ZmTable :dataInfo="goodsInfo" :goodsCount="count.goodsCount" v-model:page="pageInfo">

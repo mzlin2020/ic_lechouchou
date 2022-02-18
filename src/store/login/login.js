@@ -34,7 +34,7 @@ const loginModule = {
       localCache.setCache("userInfo", userInfo);
 
       //跳转到首页
-      router.push("/main/system");
+      router.push("/main/anchors");
     },
     // 触发浏览器刷新时，重新将token，userInfo，userMenus缓存起来
     loadLocalLogin({ commit }) {

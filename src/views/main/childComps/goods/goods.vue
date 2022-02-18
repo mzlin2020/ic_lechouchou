@@ -66,18 +66,18 @@ const formData = reactive({
 
 // 重置按钮
 const handleResetClick = () => {
-  formData.title = ""
-  formData.catName = ""
-  formData.min = ""
-  formData.max = ""
-  getGoodsInfo() 
+  formData.title = "";
+  formData.catName = "";
+  formData.min = "";
+  formData.max = "";
+  getGoodsInfo();
   setTimeout(() => {
     count.goodsCount = localCache.getCache("goodsCount");
   }, 1000);
 };
 // 搜索按钮
 const handleSearchClick = () => {
-  getGoodsInfo(formData)
+  getGoodsInfo(formData);
   setTimeout(() => {
     count.goodsCount = localCache.getCache("goodsCount");
   }, 1000);
@@ -114,7 +114,7 @@ let count = reactive({
 });
 
 // pageInfo改变时，重新发送网络请求
-watch(pageInfo, () => getGoodsInfo());
+watch(pageInfo, () => getGoodsInfo(formData));
 
 // 关进黑屋操作
 const forbidden = (data) => {

@@ -15,14 +15,15 @@
     </div>
     <!-- echart表格 -->
     <div class="chart">
-      <LineEcharts/>
+      <LineEcharts :historyCategoryData="historyCategoryData" ref="lineEchartsRef"/>
     </div>
   </div>
 </template>
 
 <script setup>
 import { useRoute } from 'vue-router'
-import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { ref, computed } from 'vue'
 import { Back } from "@element-plus/icons-vue"
 import AnchorTable  from './child/anchorTable.vue'
 import AnchorImage from './child/anchorImage.vue'
@@ -39,18 +40,33 @@ const { anchorId } = route.params
 let anchorInfo = ref(null)
 // 2.直播商品类别数据
 let categoryData = ref(null)
+
+// 3.获取商品类别的历史数据
+const store = useStore()
+let historyCategoryData = computed(() => store.state.anchors.historyData)
 const getData = async(anchorId, catName) => {
   const data1 = await getCatAbilityAnchorInfo(anchorId)
   const data2 = await getCatAbilityData(anchorId, catName)
+  store.dispatch('anchors/historyCatAblityAction', { anchorId, catName })
   anchorInfo.value = data1
   categoryData.value = data2
 }
+
 getData(anchorId)
 
+
+const lineEchartsRef = ref()
 // 获取商品类别的选择，重新发送网路请求
-const categorySelection = (data) => {
-  getData(anchorId, data)
+const categorySelection = (catName) => {
+  // 如果类别是全部，则catName不传值
+  if(catName === '全部') catName = undefined
+  getData(anchorId, catName)
+
+  setTimeout(() => {
+    lineEchartsRef.value.oprionAction()
+  }, 1000);
 }
+
 
 
 // 返回上一页

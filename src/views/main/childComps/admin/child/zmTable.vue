@@ -10,7 +10,7 @@
       </slot>
     </div>
 
-    <el-table :data="dataInfo" style="width: 100%" @current-change="handleCurrentChange" highlight-current-row>
+    <el-table :data="dataInfo" style="width: 100%"  highlight-current-row>
       <!-- 选择列 -->
       <!-- <el-table-column type="selection" width="80" align="center" /> -->
       <!-- 序号列 -->
@@ -59,9 +59,9 @@ const tableList = [
 ];
 
 // 查看哪一个行被选中
-const handleCurrentChange = (currentRow) => {
-  console.log("哪一个选项被相中", currentRow);
-};
+// const handleCurrentChange = (currentRow) => {
+//   console.log("哪一个选项被相中", currentRow);
+// };
 
 // 移动端适配
 // let ispc = isPC();

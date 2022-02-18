@@ -72,7 +72,6 @@ const pageInfo = ref({
 });
 
 // 二、网络请求相关
-
 // 发送网络请求，获取数据(保存到vuex)
 const store = useStore();
 const anchorsInfo = computed(() => store.state.anchors.anchorsInfo);
@@ -91,7 +90,7 @@ let count = reactive({
 });
 
 // pageInfo改变时，重新发送网络请求
-watch(pageInfo, () => getAnchorsInfo());
+watch(pageInfo, () => getAnchorsInfo(formData));
 
 // 重置按钮（1、清空formData 2、发送网络请求返回原先的数据）
 const handleResetClick = () => {

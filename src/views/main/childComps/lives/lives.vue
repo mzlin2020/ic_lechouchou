@@ -101,7 +101,7 @@ let count = reactive({
 });
 
 // pageInfo改变时，重新发送网络请求
-watch(pageInfo, () => getLivesInfo());
+watch(pageInfo, () => getLivesInfo(formData));
 
 // 三、表格逻辑
 // 关进黑屋

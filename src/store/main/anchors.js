@@ -1,5 +1,7 @@
 import { request } from "../../network/request";
 import localCache from "@/utils/cache";
+import { handleHistoryCatAbility } from '@/utils/handleHistoryCatAbility'
+
 const anchorsModule = {
   namespaced: true,
   state() {
@@ -7,6 +9,9 @@ const anchorsModule = {
       anchorsInfo: [],
       anchorsCount: null,
       darkRoomData: null,
+
+      // 详情页主播历史带货能力数据
+      historyData: {}
     };
   },
   mutations: {
@@ -20,6 +25,11 @@ const anchorsModule = {
     saveDarkRoomInfo(state, anchorsInfo) {
       state.darkRoomData = anchorsInfo;
     },
+
+    // 保存历史记录信息（带货能力页面）
+    saveHistoryData(state, historyCatAblity) {
+      state.historyData = historyCatAblity
+    }
   },
   actions: {
     async getAnchorsInfoAction({ commit }, payload) {
@@ -52,6 +62,21 @@ const anchorsModule = {
       // 保存
       commit("saveDarkRoomInfo", darkRoomInfo);
     },
+
+    // 主播历史带货能力记录信息
+    async historyCatAblityAction({commit}, payload) {
+      let res = await request({
+        url: "anchors/catAbility/history",
+        params: {
+          anchorId: payload.anchorId,
+          catName: payload.catName,
+        },
+      })
+      // 对数据进行处理，使其符合echarts的配置要求
+      res =  handleHistoryCatAbility(res, payload.catName)
+      // 保存
+      commit('saveHistoryData', res)
+    }
   },
 };
 export default anchorsModule;

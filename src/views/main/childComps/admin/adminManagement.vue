@@ -56,7 +56,7 @@
     <!-- 修改的对话框 -->
     <div class="dialog">
       <el-dialog v-model="isUpdateUser" title="信息修改" :width="dialogWidth" center>
-        <ZmForm :formItems="updateUserInfo" :formData="updateUserData" :collayout="collayout" />
+        <ZmForm :formItems="power ===1 ? updateUserInfo : lowUpdateUserInfo" :formData="updateUserData" :collayout="collayout" />
         <template #footer>
           <span class="dialog-footer">
             <el-button @click="isUpdateUser = false">取消</el-button>
@@ -86,10 +86,11 @@ import ZmForm from "@/components/zmForm-UI/zmForm.vue";
 import zmTable from "./child/zmTable.vue";
 import { register, update, remove } from "@/network/admin";
 import { Delete, Edit } from "@element-plus/icons-vue";
+import { ElMessage } from 'element-plus'
 import { reactive, computed, ref } from "vue";
 import { useStore } from "vuex";
 import { isPC } from "@/utils/isPc";
-import { formItems, newUserItems, updateUserInfo } from "./child/search.config.js";
+import { formItems, newUserItems, updateUserInfo, lowUpdateUserInfo } from "./child/search.config.js";
 
 // 一、搜索框的逻辑代码
 // 获取用户数据
@@ -118,11 +119,17 @@ const handleSearchClick = () => {
   console.log("搜索");
 };
 
+
+
 // 二、表格的逻辑代码
 // 删除
 let isRemoveUserDialog = ref(false);
 let willingRmoveUsername = ref("");
 const BoforeDeleteUser = (row) => {
+  if(power !== 1) {
+    forbidden('抱歉,您不具备权限~')
+    return
+  }
   // 获取用户账号,并根据账号去服务器进行删除
   let { username } = row;
   willingRmoveUsername.value = username;
@@ -138,41 +145,55 @@ const removeUser = () => {
 };
 
 
-// 编辑
+// 编辑（修改）
 const updateUserData = reactive({
   username: "",
   name: "",
   password: "",
   permissions: "",
   row: "",
-  isPasswordChange: false,
+  isPasswordChange: 0,
 });
 const isUpdateUser = ref(false);
 const editUser = (row) => {
-  isUpdateUser.value = true;
   const { name, permissions, password, username } = row;
   (updateUserData.name = name), (updateUserData.permissions = permissions);
   updateUserData.username = username;
   updateUserData.password = password;
   updateUserData.row = row;
+
+  // 判断权限
+  if(userId !== updateUserData.username && power !== 1) {
+    forbidden('抱歉, 您不能修改其他用户的信息~')
+    return 
+  }
+
+  isUpdateUser.value = true;
+
 };
 const updateInfo = () => {
   isUpdateUser.value = false;
   // 判断用户是否改了密码
   if (updateUserData.password !== updateUserData.row.password) {
-    updateUserData.isPasswordChange = true;
+    updateUserData.isPasswordChange = 1;
   }
-  
   update(updateUserData);
   setTimeout(() => {
     //更新
     getUserData();
+    updateUserData.isPasswordChange = 0;
   }, 1000);
 };
+
 
 // 三、对话框逻辑(创建用户)
 let dislogVisible = ref(false);
 const showDialog = () => {
+  // 判断权限
+  if(power !== 1) {
+    forbidden('抱歉,您不具备权限~')
+    return
+  }
   dislogVisible.value = true;
 };
 const newUserData = reactive({
@@ -185,6 +206,7 @@ const collayout = {
 };
 // 注册用户
 const registerUser = async () => {
+
   dislogVisible.value = false;
   register(newUserData);
   setTimeout(() => {
@@ -197,6 +219,18 @@ let dialogWidth = "30%";
 if (!isPC()) {
   dialogWidth = "80%";
 }
+
+//五、 判断用户权限
+const power =store.state.login.userInfo.permissions
+const userId = store.state.login.userInfo.userId
+const forbidden = (msg) => {
+    ElMessage({
+    message: msg,
+    type: 'warning'
+  })
+}
+
+
 </script>
 
 <style scoped>

@@ -68,3 +68,20 @@ export const updateUserInfo = [
     ]
   }
 ]
+
+
+// 不具备权限的用户拥有的表单
+export const lowUpdateUserInfo = [
+  { 
+    field: 'name',
+    type: 'input',
+    label: '昵称',
+    placeholder: '修改昵称'
+  },
+  { 
+    field: 'password',
+    type: 'password',
+    label: '新密码',
+    placeholder: '请输入新密码'
+  }
+]

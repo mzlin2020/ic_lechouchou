@@ -16,7 +16,7 @@ export function request(config) {
       // 获取token
       const token = localCache.getCache("token");
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = `${token}`;
       }
       return config;
     });

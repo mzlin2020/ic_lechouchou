@@ -43,7 +43,7 @@ export const update = async (updateUserData) => {
     method: "put",
   });
   if (!res) {
-    alert("更新失败，请检查输入是否有误");
+    alert("更新失败,请检查输入是否有误");
   } else {
     alert("修改成功");
   }

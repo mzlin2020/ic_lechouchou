@@ -1,12 +1,12 @@
 export const menu = [
-  {
-    id: 1,
-    name: "系统总览",
-    type: 1,
-    url: "",
-    icon: "Monitor",
-    children: [{ id: 10, name: "系统总览", type: 2, url: "/main/system" }],
-  },
+  // {
+  //   id: 1,
+  //   name: "系统总览",
+  //   type: 1,
+  //   url: "",
+  //   icon: "Monitor",
+  //   children: [{ id: 10, name: "系统总览", type: 2, url: "/main/system" }],
+  // },
   {
     id: 2,
     name: "模块管理",
@@ -27,7 +27,7 @@ export const menu = [
     icon: "Setting",
     children: [
       { id: 30, name: "用户管理", type: 2, url: "/main/admin/Management" },
-      { id: 31, name: "更多设置", type: 2, url: "/main/admin/permission" },
+      // { id: 31, name: "更多设置", type: 2, url: "/main/admin/permission" },
     ],
   },
 ];

@@ -7,7 +7,12 @@
     <el-table-column prop="catName" label="类目" align="center" />
     <el-table-column prop="saleNum" label="带货数量" align="center" :sortable="true"/>
     <el-table-column prop="pgItemSalePrice" label="均价" align="center" :sortable="true" />
-    <el-table-column prop="catSaleAbility" label="类目带货能力" align="center" :sortable="true" />
+    <el-table-column prop="catSaleAbility" label="类目带货能力" align="center" :sortable="true" >
+      <template #default="scope">
+        {{scope.row.catSaleAbility.toFixed(2)}}
+      </template>
+    </el-table-column>
+
     <el-table-column prop="catSaleAbilityTrend" label="能力趋势" align="center" :sortable="true">
       <template #default="scope">
         {{scope.row.catSaleAbilityTrend >= 0 ? "上升" : "下降"}}
@@ -32,7 +37,7 @@ defineProps({
 
 // 绑定数据
 const formData = reactive({
-  selection: "",
+  selection: "全部",
 });
 const em = defineEmits(['categorySelection'])
 watch(formData, () => {
