@@ -2,7 +2,7 @@ import { request } from "./request";
 
 // 关进黑屋
 export const livesDarkRoom = (liveId, ifShow) => {
-  request({
+  return request({
     url: "lives/ifShow",
     method: "put",
     params: {
@@ -26,7 +26,7 @@ export const removeLiveGoodsData = (itemId) => {
 
 // 关进黑屋
 export const liveGoodsDarkRoom = (itemId, ifShow) => {
-  request({
+  return request({
     url: "lives/liveGoods/ifShow",
     method: "put",
     params: {

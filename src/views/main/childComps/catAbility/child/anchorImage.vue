@@ -2,7 +2,7 @@
   <div class="anchor-image">
     <template v-for="item in tableData" :key="item.ID">
       <div class="image">
-        <el-image style="width: 140px; height: 140px" :src="item.picUrl"></el-image>
+        <el-image style="width: 140px; height: 140px" :src="item.picUrl" lazy></el-image>
       </div>
       <div class="name">{{ item.anchorName }}</div>
       <div class="telephone">联系方式: {{ item.telephone ? item.telephone : "未知" }}</div>

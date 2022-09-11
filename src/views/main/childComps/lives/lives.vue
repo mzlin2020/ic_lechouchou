@@ -105,16 +105,21 @@ watch(pageInfo, () => getLivesInfo(formData));
 
 // 三、表格逻辑
 // 关进黑屋
-const forbidden = (data) => {
+const forbidden = async (data) => {
   const { liveId } = data;
-  livesDarkRoom(liveId, 0);
-  ElMessage({
-    message: "操作成功",
-    type: "success",
-  });
-  setTimeout(() => {
+  const res= await livesDarkRoom(liveId, 0);
+  if(res) {
+    ElMessage({
+      message: "操作成功",
+      type: "success",
+    });
     getLivesInfo(); //更新
-  }, 400);
+  }else {
+    ElMessage({
+      message: "操作失败",
+      type: "error",
+    });
+  }
 };
 // 直播商品
 const analyze = (data) => {

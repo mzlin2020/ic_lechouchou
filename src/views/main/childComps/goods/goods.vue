@@ -24,7 +24,7 @@
       </template>
       <!-- 图片 -->
       <template #picUrl="scope">
-        <el-image style="width: 60px; height: 60px" :src="scope.row.picUrl" :preview-src-list="[scope.row.picUrl]">
+        <el-image style="width: 60px; height: 60px" :src="scope.row.picUrl + '_180x180'" :preview-src-list="[scope.row.picUrl]" lazy>
         </el-image>
       </template>
       <!-- 格式化价格 -->

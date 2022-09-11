@@ -202,7 +202,7 @@ const newUserData = reactive({
   password: "",
 });
 const collayout = {
-  xl: 1,
+  xl: '1',
 };
 // 注册用户
 const registerUser = async () => {

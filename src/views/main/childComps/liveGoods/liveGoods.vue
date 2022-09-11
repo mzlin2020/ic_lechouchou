@@ -20,7 +20,7 @@
       </template>
       <!-- 图片 -->
       <template #picUrl="scope">
-        <el-image style="width: 60px; height: 60px" :src="scope.row.picUrl" :preview-src-list="[scope.row.picUrl]">
+        <el-image style="width: 60px; height: 60px" :src="scope.row.picUrl + '_180x180'" :preview-src-list="[scope.row.picUrl]" lazy>
         </el-image>
       </template>
       <!-- 格式化价格 -->
@@ -88,16 +88,16 @@ watch(pageInfo, () => getGoodsInfo());
 
 
 // 关进黑屋操作
-const forbidden = data => {
+const forbidden = async (data) => {
   const { itemId } = data
-  liveGoodsDarkRoom(itemId,0)
-  ElMessage({
-  message: '操作成功',
-  type: 'success',
-})
-  setTimeout(() => {
+  const res = await liveGoodsDarkRoom(itemId,0)
+  if(res) {
     getGoodsInfo(); //更新
-  }, 2000);
+    ElMessage({
+    message: '操作成功',
+    type: 'success',
+  })
+  }
 }
 
 // 删除商品操作
